@@ -27,7 +27,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String _url = "https://owlbot.info/api/v4/dictionary/";
-  String _token = "YOUR API KEY HERE";
+  String _token = "4efef0edb8c172d1308599fa914dbb218c0db152";
 
   TextEditingController _controller = TextEditingController();
 
@@ -43,7 +43,8 @@ class _MyHomePageState extends State<MyHomePage> {
     }
 
     _streamController.add("waiting");
-    Response response = await get(_url + _controller.text.trim(), headers: {"Authorization": "Token " + _token});
+    Response response = await get(_url + _controller.text.trim(),
+        headers: {"Authorization": "Token " + _token});
     _streamController.add(json.decode(response.body));
   }
 
@@ -125,17 +126,24 @@ class _MyHomePageState extends State<MyHomePage> {
                     Container(
                       color: Colors.grey[300],
                       child: ListTile(
-                        leading: snapshot.data["definitions"][index]["image_url"] == null
+                        leading: snapshot.data["definitions"][index]
+                                    ["image_url"] ==
+                                null
                             ? null
                             : CircleAvatar(
-                                backgroundImage: NetworkImage(snapshot.data["definitions"][index]["image_url"]),
+                                backgroundImage: NetworkImage(snapshot
+                                    .data["definitions"][index]["image_url"]),
                               ),
-                        title: Text(_controller.text.trim() + "(" + snapshot.data["definitions"][index]["type"] + ")"),
+                        title: Text(_controller.text.trim() +
+                            "(" +
+                            snapshot.data["definitions"][index]["type"] +
+                            ")"),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(snapshot.data["definitions"][index]["definition"]),
+                      child: Text(
+                          snapshot.data["definitions"][index]["definition"]),
                     )
                   ],
                 );
